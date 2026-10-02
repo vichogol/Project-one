@@ -1,24 +1,112 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bar {
+  flex: 0 0 12.5%;
+  background: #2d3034;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(16px, 4vw, 48px);
+}
+
+.bar__nav {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.bar__nav::-webkit-scrollbar {
+  display: none;
+}
+
+.bar__list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(14px, 3vw, 40px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.bar__link {
+  font: inherit;
+  font-size: clamp(11px, 1.1vw, 14px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.72);
+  background: none;
+  border: 0;
+  padding: 6px 2px;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.bar__link:hover,
+.bar__link:focus-visible {
+  color: #f4f1ea;
+}
+
+.bar__link--cta {
+  color: #f4f1ea;
+  border-bottom: 1px solid rgba(244, 241, 234, 0.45);
+}
+
 .stage {
   position: relative;
-  width: 100%;
-  height: 100dvh;
+  flex: 1 1 auto;
+  min-height: 0;
   background: #000;
 }
 
-.hint {
+.overlay {
   position: absolute;
-  left: 50%;
-  bottom: 28px;
-  transform: translateX(-50%);
-  margin: 0;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(244, 241, 234, 0.55);
+  transform: translate(-50%, -50%);
+  text-align: center;
   pointer-events: none;
-  transition: opacity 900ms ease;
+  user-select: none;
 }
 
-.hint--hidden {
-  opacity: 0;
+.brand__title {
+  margin: 0;
+  font-size: clamp(16px, 2.1vw, 30px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f4f1ea;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.75);
+}
+
+.brand__slogan {
+  margin: 10px 0 0;
+  font-size: clamp(12px, 1.1vw, 15px);
+  letter-spacing: 0.28em;
+  color: rgba(244, 241, 234, 0.6);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.75);
+}
+
+.overlay--left {
+  width: min(30%, 380px);
+  min-width: 240px;
+  text-align: left;
+}
+
+.key__text {
+  margin: 0;
+  font-size: clamp(12px, 1.05vw, 15px);
+  line-height: 1.7;
+  color: rgba(244, 241, 234, 0.82);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+}
+
+.key__text strong {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #f4f1ea;
 }
