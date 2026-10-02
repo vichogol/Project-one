@@ -48,12 +48,18 @@ function Home() {
   const centerY = box.height / 2;
   const brandY = centerY - (box.height - centerY) / 5;
 
+  const pad = 20;
   const keyX = box.width / 4;
   const keyY = centerY + (box.height - centerY) / 6;
-  const keyLeft = keyX - keyBox.width / 2;
-  const keyTop = keyY - keyBox.height / 2;
-  const keyLeftX = keyLeft - keyLeft / 2 + keyBox.width / 2;
-  const keyTopY = keyTop + (box.height - keyTop) / 3 + keyBox.height / 2;
+  const halfW = keyBox.width / 2;
+  const halfH = keyBox.height / 2;
+  const keyLeft = keyX - halfW;
+  const keyTop = keyY - halfH;
+  const minX = Math.min(pad + halfW, box.width / 2);
+  const minY = Math.min(pad + halfH, box.height / 2);
+  const keyLeftX = Math.min(Math.max(keyLeft - keyLeft / 2 + halfW, minX), box.width - pad - halfW);
+  const keyTopY = Math.min(Math.max(keyTop + (box.height - keyTop) / 3 + halfH, minY), box.height - pad - halfH);
+  const revealRadius = Math.max(130, Math.min(220, box.width * 0.42));
 
   return (
     <main className="stage" ref={stageRef}>
@@ -67,7 +73,7 @@ function Home() {
         inkColor="#0a0a0c"
         paperColor="#68696a"
         contrast={1.2}
-        revealRadius={220}
+        revealRadius={revealRadius}
         softness={0.6}
         linger={1}
         rimColor="#a78bfa"
