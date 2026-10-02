@@ -8,7 +8,7 @@ const SECTIONS = [
   { label: 'Cotiza', to: '/cotizacion' }
 ];
 
-const LOGO_SRC = import.meta.env.VITE_LOGO_SRC || '/logo.svg';
+const LOGO_SRC = import.meta.env.VITE_LOGO_SRC || `${import.meta.env.BASE_URL}logo.svg`;
 
 function Bar() {
   return (

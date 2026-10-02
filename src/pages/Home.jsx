@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import DitherVeil from '../components/DitherVeil.jsx';
 
-const IMAGE_SRC = import.meta.env.VITE_IMAGE_SRC || '/image.png';
+const IMAGE_SRC = import.meta.env.VITE_IMAGE_SRC || `${import.meta.env.BASE_URL}image.png`;
 const FALLBACK_SRC = 'https://images.unsplash.com/photo-1737071371043-761e02b1ef95?q=80&w=1400&auto=format&fit=crop';
 const TITLE = 'Project One | Marketing Audiovisual';
 const SLOGAN = '*Slogan*';
