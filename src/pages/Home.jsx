@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import Curtain from '../components/Curtain.jsx';
 import DitherVeil from '../components/DitherVeil.jsx';
 
 const IMAGE_SRC = import.meta.env.VITE_IMAGE_SRC || `${import.meta.env.BASE_URL}image.png`;
@@ -60,6 +61,7 @@ function Home() {
   const keyLeftX = Math.min(Math.max(keyLeft - keyLeft / 2 + halfW, minX), box.width - pad - halfW);
   const keyTopY = Math.min(Math.max(keyTop + (box.height - keyTop) / 3 + halfH, minY), box.height - pad - halfH);
   const revealRadius = Math.max(130, Math.min(220, box.width * 0.42));
+  const placed = box.width > 0 && keyBox.width > 0;
 
   return (
     <main className="stage" ref={stageRef}>
@@ -73,6 +75,7 @@ function Home() {
         inkColor="#0a0a0c"
         paperColor="#68696a"
         contrast={1.2}
+        brightness={0.03}
         revealRadius={revealRadius}
         softness={0.6}
         linger={1}
@@ -83,14 +86,17 @@ function Home() {
         wander
         clickBurst
       />
-      <div className="overlay" style={{ top: `${brandY}px`, left: `${centerX}px` }}>
+      <div
+        className="overlay"
+        style={{ top: `${brandY}px`, left: `${centerX}px`, visibility: box.width > 0 ? 'visible' : 'hidden' }}
+      >
         <h1 className="brand__title">{TITLE}</h1>
         <p className="brand__slogan">{SLOGAN}</p>
       </div>
       <div
         ref={keyRef}
         className="overlay overlay--left"
-        style={{ top: `${keyTopY}px`, left: `${keyLeftX}px` }}
+        style={{ top: `${keyTopY}px`, left: `${keyLeftX}px`, visibility: placed ? 'visible' : 'hidden' }}
       >
         <p className="key__text">
           <strong>¡Atención a este dato clave!</strong> Todo lo que necesitas saber está justo ahí, a un solo
@@ -98,6 +104,7 @@ function Home() {
           detalle importante. ¡Échale un vistazo!
         </p>
       </div>
+      <Curtain />
     </main>
   );
 }

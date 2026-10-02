@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Curtain from '../components/Curtain.jsx';
 import Turnstile from '../components/Turnstile.jsx';
 
 const CONTACT_METHODS = ['WhatsApp', 'Correo electrónico', 'Llamada telefónica'];
@@ -141,6 +142,7 @@ function Quote() {
           Limpiar formulario
         </button>
       </div>
+      <Curtain />
     </main>
   );
 }
