@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Curtain from './Curtain.jsx';
 
 const SECTIONS = [
   { label: 'Servicio', to: null },
@@ -14,6 +15,7 @@ const LOGO_SRC = import.meta.env.VITE_LOGO_SRC || `${import.meta.env.BASE_URL}lo
 function Bar() {
   const navRef = useRef(null);
   const [more, setMore] = useState(false);
+  const [curtainKey, setCurtainKey] = useState(0);
 
   useEffect(() => {
     const element = navRef.current;
@@ -31,6 +33,27 @@ function Bar() {
       observer.disconnect();
       element.removeEventListener('scroll', update);
       window.removeEventListener('resize', update);
+    };
+  }, []);
+
+  useEffect(() => {
+    let firstShow = true;
+    const replay = () => setCurtainKey(key => key + 1);
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') replay();
+    };
+    const onPageShow = event => {
+      if (firstShow) {
+        firstShow = false;
+        return;
+      }
+      if (event.persisted) replay();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('pageshow', onPageShow);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pageshow', onPageShow);
     };
   }, []);
 
@@ -62,6 +85,7 @@ function Bar() {
         </nav>
         <span className="bar__more" aria-hidden="true" />
       </div>
+      <Curtain className="curtain--bar" duration={700} delay={60} replayKey={curtainKey} />
     </header>
   );
 }

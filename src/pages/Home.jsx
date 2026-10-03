@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Curtain from '../components/Curtain.jsx';
 import DitherVeil from '../components/DitherVeil.jsx';
+import StrokeText from '../components/StrokeText.jsx';
 
 const IMAGE_SRC = import.meta.env.VITE_IMAGE_SRC || `${import.meta.env.BASE_URL}image.png`;
 const FALLBACK_SRC = 'https://images.unsplash.com/photo-1737071371043-761e02b1ef95?q=80&w=1400&auto=format&fit=crop';
@@ -90,7 +91,23 @@ function Home() {
         className="overlay"
         style={{ top: `${brandY}px`, left: `${centerX}px`, visibility: box.width > 0 ? 'visible' : 'hidden' }}
       >
-        <h1 className="brand__title">{TITLE}</h1>
+        <h1 className="brand__stroke">
+          <StrokeText
+            text={TITLE}
+            strokeColor="#ffffff"
+            fillColor="#f4f1ea"
+            strokeWidth={1.2}
+            drawDuration={1.8}
+            fillDelay={0.15}
+            stagger={0.045}
+            ease="power2.out"
+            trigger="mount"
+            fillMode="wipe"
+            fontSize={72}
+            fontWeight={600}
+            letterSpacing={-2}
+          />
+        </h1>
         <p className="brand__slogan">{SLOGAN}</p>
       </div>
       <div
